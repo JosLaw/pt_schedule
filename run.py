@@ -23,7 +23,7 @@ def get_name():
         print("Enter first name & surname initial (NameS)")
         name = input("Name: ").capitalize()
         try:
-            if len(name) <= 1:
+            if len(name) <= 2:
                 raise ValueError(
                     f"More than one letter required for name"
                 )
@@ -40,4 +40,33 @@ def get_name():
     return client
 
 
+def check_client():
+    """
+    Checks if user is existing client or new client
+    Searches spreadhseet for name to confirm user input
+    """
+    user = []
 
+    while True:
+        client_check = input("Exsisting client? (Y) or (N): \n").capitalize()
+        try:
+            if client_check == "Y" or client_check == "N":
+                print("Checking database...")
+                user.append(client)
+                worksheet = SHEET.worksheet('clients')
+                client_list = worksheet.get('A2:A12')
+                if user in client_list:
+                    print(f"Welcome back {client} \n")
+                else:
+                    print(f"Creating profile for {client} \n")
+                    break
+            else:
+                raise ValueError(
+                    f"Type (Y) or (N)"
+                )
+        except ValueError as e:
+            print(f"Invalid input: {e}.\n")
+
+
+get_name()
+check_client()
