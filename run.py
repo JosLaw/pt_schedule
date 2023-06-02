@@ -41,7 +41,20 @@ worksheet_days = {
     'sun': booking_worksheet.get('H2:H12'),
 }
 
-day_choice = ""
+# Timeslot from worksheet
+timeslot = {
+    0: ("08:00"),
+    1: ("09:00"),
+    2: ("10:00"),
+    3: ("11:00"),
+    4: ("12:00"),
+    5: ("13:00"),
+    6: ("14:00"),
+    7: ("15:00"),
+    8: ("16:00"),
+    9: ("17:00"),
+    10: ("18:00"),
+}
 
 
 def get_name():
@@ -138,11 +151,20 @@ def check_worksheet():
     Checks worksheet for unbooked time slots which are marked by '-'
     from user's day choice
     """
-    b_test = np.array(worksheet_days[choice_day.lower()])
+    check_timeslot = np.array(worksheet_days[choice_day.lower()])
     searchval = '-'
-    ii = np.where(b_test == searchval)[0]
-    print(ii)
-
+    ii = np.where(check_timeslot == searchval)[0]
+    free = [(i) for i in ii if i in timeslot]    
+    available_slots = [(k, v) for k, v in timeslot.items() if k in free]
+    print(f"Available slots: \n {available_slots}")
+    choice = int(input(f"Select timeslot: "))
+    if choice not in available_slots:
+        raise ValueError(
+            f"Please enter a listed number"
+        )
+    else:
+        print(f"You selected {choice}")
+                
 
 def update_clients(data):
     """
