@@ -1,6 +1,7 @@
 import gspread
 import pandas as pd
 import numpy as np
+from more_itertools import locate
 from google.oauth2.service_account import Credentials
 
 SCOPE = [
@@ -154,17 +155,19 @@ def check_worksheet():
     check_timeslot = np.array(worksheet_days[choice_day.lower()])
     searchval = '-'
     ii = np.where(check_timeslot == searchval)[0]
-    free = [(i) for i in ii if i in timeslot]    
+    free = [(i) for i in ii if i in timeslot]
     available_slots = [(k, v) for k, v in timeslot.items() if k in free]
-    print(f"Available slots: \n {available_slots}")
+    print(f"Available slots: \n {available_slots} \n")
     choice = int(input(f"Select timeslot: "))
-    if choice not in available_slots:
+    if choice not in timeslot:
         raise ValueError(
             f"Please enter a listed number"
         )
     else:
-        print(f"You selected {choice}")
-                
+        choice_time = timeslot[choice]
+        booking.append(choice_time)
+        print(f"You selected {choice_time}")
+
 
 def update_clients(data):
     """
