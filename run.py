@@ -16,7 +16,8 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('pt_ schedule')
 
 user = []  # Array to hold username
-booking = []  # Array to hold booking details
+booking_day = []
+booking_time = []  # Array to hold booking details
 target_per_week = []  # Array to hold user's target number of training per week
 
 # Days to book
@@ -121,28 +122,39 @@ def make_booking():
         new_booking = input("Make a new booking? (Y) or (N)\n").capitalize()
         try:
             if new_booking == "N":
-                print("Thanks for enquiring. See you soon!")
-                break
+                print("Thanks for enquiring. Come back soon!")
+                exit()
             elif new_booking == "Y":
                 print("Checking database...")
-                print(days)
-                select_day = int(input(
-                    "What day would you like to book? Enter value 0 - 6: \n"))
-                if select_day not in days:
-                    raise ValueError(
-                        f"Please enter a listed number for day"
-                    )
-                else:
-                    global choice_day
-                    choice_day = days[select_day]
-                    print(
-                        f"You selected {choice_day}"
-                    )
-                    print("checking system...")
-                    check_worksheet()
-                    break
+                break
             else:
                 print("Invalid input. Type (Y) or (N)")
+        except ValueError as e:
+            print(f"Invalid input: {e}.\n")
+
+
+def chose_day():
+    """
+    User to select day
+    """
+    print(days)
+    while True:
+        select_day = int(input(
+            "What day would you like to book? Enter value 0 - 6: \n"))
+        try:
+            if select_day not in days:
+                raise ValueError(
+                    f"Please enter a listed number for day"
+                )
+            else:
+                global choice_day
+                choice_day = days[select_day]
+                print(
+                    f"You selected {choice_day}"
+                )
+                print("checking system...")
+                booking_day.append(choice_day)
+                break
         except ValueError as e:
             print(f"Invalid input: {e}.\n")
 
@@ -152,21 +164,37 @@ def check_worksheet():
     Checks worksheet for unbooked time slots which are marked by '-'
     from user's day choice
     """
-    check_timeslot = np.array(worksheet_days[choice_day.lower()])
-    searchval = '-'
-    ii = np.where(check_timeslot == searchval)[0]
-    free = [(i) for i in ii if i in timeslot]
-    available_slots = [(k, v) for k, v in timeslot.items() if k in free]
-    print(f"Available slots: \n {available_slots} \n")
-    choice = int(input(f"Select timeslot: "))
-    if choice not in timeslot:
-        raise ValueError(
-            f"Please enter a listed number"
-        )
-    else:
-        choice_time = timeslot[choice]
-        booking.append(choice_time)
-        print(f"You selected {choice_time}")
+    while True:
+        check_timeslot = np.array(worksheet_days[choice_day.lower()])
+        searchval = '-'
+        ii = np.where(check_timeslot == searchval)[0]
+        free = [(i) for i in ii if i in timeslot]
+        available_slots = [(k, v) for k, v in timeslot.items() if k in free]
+        slot = [k[0] for k in available_slots]
+        print(f"Available slots: \n {available_slots} \n")
+        choice = int(input(f"Select timeslot: "))
+        try:
+            if choice not in slot:
+                raise ValueError(
+                    f"Please enter a listed number"
+                )
+            else:
+                choice_time = timeslot[choice]
+                booking_time.append(choice_time)
+                print(f"You selected {choice_time}")
+                break
+        except ValueError as e:
+            print(f"Slot unavailable: {e}.\n")
+
+
+def update_bookings(date, hour):
+    """
+    Update spreadsheet with user booking
+    """
+    b_worksheet = SHEET.worksheet('bookings')
+    b_day = b_worksheet.get('B1:H1')
+    b_time = b_worksheet.get('A2:A12')
+    print(date, hour)
 
 
 def update_clients(data):
@@ -177,14 +205,17 @@ def update_clients(data):
     create_user.append_row(data)
 
 
-# def main():
+def main():
     """
     Calls all functions required on page load
     """
     get_name()
     check_client()
     make_booking()
+    chose_day()
+    check_worksheet()
     # update_clients(user)
+    update_bookings(booking_day, booking_time)
 
 
-make_booking()
+main()
