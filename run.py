@@ -202,8 +202,7 @@ def check_worksheet():
                 )
             else:
                 choice_time = timeslot[choice]
-                # booking_time.append(choice_time)
-                print(f"You selected {choice_time}")
+                print(f"You selected {choice_time}\n")
                 return choice_time
         except ValueError as e:
             print(f"Slot unavailable: {e}.\n")
@@ -217,6 +216,29 @@ def update_bookings(day, time, col_day):
     grid_time = grid_ref_time[time]
     b_worksheet.update_cell(grid_time, day + 2, client)
     print(f"You have booked a session on {col_day} at {time}")
+
+
+def num_booking(username):
+    """
+    Check number of bookings for user
+    """
+    while True:
+        num_of_bookings = booking_worksheet.findall(username)
+        count = len(num_of_bookings)
+        check_num = input(
+            "Check number of bookings for the week? (Y) or (N) \n"
+        )
+        try:
+            if check_num.upper() == 'Y':
+                print(f"You have {count} bookings this week")
+                break
+            elif check_num == 'N':
+                print(f'Thank you. See you soon!')
+                exit()
+            else:
+                raise ValueError(f"Type 'Y' or 'N' ")
+        except ValueError as e:
+            print(f"Invalid input: {e}.\n")
 
 
 def update_clients(data):
@@ -236,8 +258,9 @@ def main():
     make_booking()
     day, col_day = choose_day()
     time = check_worksheet()
-    # update_clients(user)
+    update_clients(user)
     update_bookings(day, time, col_day)
+    num_booking(username)
 
 
 main()
