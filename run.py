@@ -1,7 +1,6 @@
 import gspread
 import pandas as pd
 import numpy as np
-from more_itertools import locate
 from google.oauth2.service_account import Credentials
 
 SCOPE = [
@@ -16,8 +15,6 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('pt_ schedule')
 
 user = []  # Array to hold username
-booking_day = []
-booking_time = []  # Array to hold booking details
 target_per_week = []  # Array to hold user's target number of training per week
 
 # Days to book
@@ -58,6 +55,32 @@ timeslot = {
     10: ("18:00"),
 }
 
+# Column reference
+grid_ref_day = {
+    'Mon': 'B',
+    'Tues': 'C',
+    'Wed': 'D',
+    "Thur": "E",
+    "Fri": "F",
+    "Sat": "G",
+    "Sun": "H",
+}
+
+# Row reference number
+grid_ref_time = {
+    "08:00": 2,
+    "09:00": 3,
+    "10:00": 4,
+    "11:00": 5,
+    "12:00": 6,
+    "13:00": 7,
+    "14:00": 8,
+    "15:00": 9,
+    "16:00": 10,
+    "17:00": 11,
+    "18:00": 12,
+}
+
 
 def get_name():
     """
@@ -85,7 +108,7 @@ def get_name():
     return client
 
 
-def check_client():
+def check_client(username):
     """
     Checks if user is existing client or new client
     Searches spreadhseet for name to confirm user input
@@ -96,14 +119,14 @@ def check_client():
         try:
             if client_check == "Y" or client_check == "N":
                 print("Checking database...")
-                user.append(client)
+                user.append(username)
                 worksheet = SHEET.worksheet('clients')
                 client_list = worksheet.get('A2:A12')
                 if user in client_list:
-                    print(f"Welcome back {client} \n")
+                    print(f"Welcome back {username} \n")
                     break
                 else:
-                    print(f"Creating profile for {client} \n")
+                    print(f"Creating profile for {username} \n")
                     break
             else:
                 raise ValueError(
@@ -125,7 +148,7 @@ def make_booking():
                 print("Thanks for enquiring. Come back soon!")
                 exit()
             elif new_booking == "Y":
-                print("Checking database...")
+                print()
                 break
             else:
                 print("Invalid input. Type (Y) or (N)")
@@ -133,7 +156,7 @@ def make_booking():
             print(f"Invalid input: {e}.\n")
 
 
-def chose_day():
+def choose_day():
     """
     User to select day
     """
@@ -153,8 +176,7 @@ def chose_day():
                     f"You selected {choice_day}"
                 )
                 print("checking system...")
-                booking_day.append(choice_day)
-                break
+                return select_day, choice_day
         except ValueError as e:
             print(f"Invalid input: {e}.\n")
 
@@ -180,21 +202,21 @@ def check_worksheet():
                 )
             else:
                 choice_time = timeslot[choice]
-                booking_time.append(choice_time)
+                # booking_time.append(choice_time)
                 print(f"You selected {choice_time}")
-                break
+                return choice_time
         except ValueError as e:
             print(f"Slot unavailable: {e}.\n")
 
 
-def update_bookings(date, hour):
+def update_bookings(day, time, col_day):
     """
     Update spreadsheet with user booking
     """
     b_worksheet = SHEET.worksheet('bookings')
-    b_day = b_worksheet.get('B1:H1')
-    b_time = b_worksheet.get('A2:A12')
-    print(date, hour)
+    grid_time = grid_ref_time[time]
+    b_worksheet.update_cell(grid_time, day + 2, client)
+    print(f"You have booked a session on {col_day} at {time}")
 
 
 def update_clients(data):
@@ -209,13 +231,13 @@ def main():
     """
     Calls all functions required on page load
     """
-    get_name()
-    check_client()
+    username = get_name()
+    check_client(username)
     make_booking()
-    chose_day()
-    check_worksheet()
+    day, col_day = choose_day()
+    time = check_worksheet()
     # update_clients(user)
-    update_bookings(booking_day, booking_time)
+    update_bookings(day, time, col_day)
 
 
 main()

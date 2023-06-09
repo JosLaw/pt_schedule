@@ -30,3 +30,6 @@ The deployment terminal is set to 80 columns by 24 rows. That means that each li
 ---
 
 Happy coding!
+
+## refs
+https://bobbyhadz.com/blog/python-remove-square-brackets-from-list#:~:text=Use%20the%20str.,string%20without%20the%20square%20brackets.
