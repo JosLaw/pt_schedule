@@ -1,5 +1,4 @@
 import gspread
-import pandas as pd
 import numpy as np
 from google.oauth2.service_account import Credentials
 
@@ -89,7 +88,7 @@ def get_name():
     """
     while True:
         print("Enter first name & surname initial (NameS)")
-        name = input("Name: ").capitalize()
+        name = input("\n").capitalize()
         try:
             if len(name) <= 2:
                 raise ValueError(
@@ -110,12 +109,12 @@ def get_name():
 
 def check_client(username):
     """
-    Checks if user is existing client or new client
+    Checks if user is a existing client or new client
     Searches spreadhseet for name to confirm user input
     """
 
     while True:
-        client_check = input("Existing client? (Y) or (N): \n").capitalize()
+        client_check = input("Existing client? (Y) or (N)\n").capitalize()
         try:
             if client_check == "Y" or client_check == "N":
                 print("Checking database...")
@@ -137,17 +136,24 @@ def check_client(username):
             print(f"Invalid input: {e}.\n")
 
 
-def make_booking():
+def make_booking(username):
     """
-    Provides booking options and puts the
-    information into an array
+    Provides booking options
     """
     while True:
         new_booking = input("Make a new booking? (Y) or (N)\n").capitalize()
         try:
             if new_booking == "N":
-                print("Thanks for enquiring. Come back soon!")
-                exit()
+                check = input(
+                    "Have you booked this week? (Y) or (N)\n").capitalize()
+                if check == "Y":
+                    num_booking(username)
+                elif check == "N":
+                    print("Make a new booking to continue\n")
+                else:
+                    print("(Y)es or (N)o not selected. You are now leaving...")
+                    print("Come back when you're ready!")
+                    exit()
             elif new_booking == "Y":
                 print()
                 break
@@ -195,7 +201,7 @@ def check_worksheet():
         available_slots = [(k, v) for k, v in timeslot.items() if k in free]
         slot = [k[0] for k in available_slots]
         print(f"Available slots: \n {available_slots} \n")
-        choice = int(input(f"Select timeslot: "))
+        choice = int(input(f"Select timeslot: \n"))
         try:
             if choice not in slot:
                 raise ValueError(
@@ -239,7 +245,7 @@ def num_booking(username):
             else:
                 raise ValueError(f"Type 'Y' or 'N' ")
         except ValueError as e:
-            print(f"Invalid input: {e}.\n")
+            print(f"Invalid input: {e}\n")
 
 
 def update_clients(data):
@@ -256,12 +262,12 @@ def main():
     """
     username = get_name()
     check_client(username)
-    make_booking()
+    make_booking(username)
     day, col_day = choose_day()
     time = check_worksheet()
     update_bookings(day, time, col_day)
     num_booking(username)
 
 
-print("Welcome to Beast PT weekly diary!\n")
+print("Welcome to PT weekly diary!\n")
 main()
