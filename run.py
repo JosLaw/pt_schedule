@@ -115,7 +115,7 @@ def check_client(username):
     """
 
     while True:
-        client_check = input("Exsisting client? (Y) or (N): \n").capitalize()
+        client_check = input("Existing client? (Y) or (N): \n").capitalize()
         try:
             if client_check == "Y" or client_check == "N":
                 print("Checking database...")
@@ -127,7 +127,8 @@ def check_client(username):
                     break
                 else:
                     print(f"Creating profile for {username} \n")
-                    break
+                    update_clients(user)
+                    return False
             else:
                 raise ValueError(
                     f"Type (Y) or (N)"
@@ -258,9 +259,9 @@ def main():
     make_booking()
     day, col_day = choose_day()
     time = check_worksheet()
-    update_clients(user)
     update_bookings(day, time, col_day)
     num_booking(username)
 
 
+print("Welcome to Beast PT weekly diary!\n")
 main()
