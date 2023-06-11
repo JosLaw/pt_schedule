@@ -117,7 +117,7 @@ def check_client(username):
         client_check = input("Existing client? (Y) or (N)\n").capitalize()
         try:
             if client_check == "Y" or client_check == "N":
-                print("Checking database...")
+                print("Checking database...\n")
                 user.append(username)
                 worksheet = SHEET.worksheet('clients')
                 client_list = worksheet.get('A2:A12')
@@ -279,6 +279,12 @@ def main():
     update_bookings(day, time, col_day)
     num_booking(username)
 
+print("============================================================")
+print("|                                                          |")
+print("|             Welcome to PT Weekly Diary!                  |")
+print("|                                                          |")
+print("============================================================")
+print("\n")
 
-print("Welcome to PT weekly diary!\n")
+
 main()
