@@ -32,7 +32,7 @@ The deployment terminal is set to 80 columns by 24 rows. That means that each li
 # **PT Diary**
 This is a terminal based app for a fictional PT business. The app will allow users to make a booking for that week. Data for the bookings and current clients are held on an external Google Worksheet. 
 
-Access the site here: <a href="https://" target="_blank"></a>
+Access the site here: <a href="https://pt-schedule.herokuapp.com/" target="_blank"></a>
 
 ![screenshot of a screen mockup](assets/images/readme_docs/screen-mockup.png)
 
@@ -101,7 +101,6 @@ The deployed site was shared amongst family and friends to obtain user experienc
 ---
 ## **Technologies**
 * HTML - Core structure of the site
-* CSS - Styling of the site
 * Javascript - Functionality and responsiveness of user initiated interactions
 * Heroku - Hosts the live site
 * Github - Stores the site code and logged versions
@@ -110,7 +109,12 @@ The deployed site was shared amongst family and friends to obtain user experienc
 ## **Deployment**
 The project was deployed to Heroku. The steps below explain the process.
 
- - 
+ - In the Settings tab of the named app, connect it to relevent Github repository
+ - Scroll down to 'Buildpacks' and add python. Add a second buildpack for nodejs
+ - Scroll up and click on the Deploy tab
+ - There are 2 options for deployment, auto or manual. Ensure main is selected for deploy branch.
+ - Click Enable Automatic deploys if you want the app to update after every push to Github
+ - For manual deployment click 'Deploy Branch'. This will have to be done after every push to Github to update the live app.
 
 ---
 ## **References/Credit**
