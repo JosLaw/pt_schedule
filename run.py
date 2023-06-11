@@ -230,8 +230,9 @@ def num_booking(username):
         try:
             if check_num.upper() == 'Y':
                 print(f"You have {count} bookings this week")
-                break
-            elif check_num == 'N':
+                print("Thanks for using PT Weekly Diary")
+                exit()
+            elif check_num.upper() == 'N':
                 print(f'Thank you. See you soon!')
                 exit()
             else:
@@ -256,15 +257,16 @@ def menu(username):
         1: "Leave",
         2: "Check your bookings",
     }
-    print("Menu: pick what action you would like (1-2)\n")
+    print("What action would you like to take? (1 or 2)\n")
     print(service)
     option = int(input("Option:\n"))
     if option in service:
-        if option == 1: print("Thanks. Come back soon!"), exit()
-        elif option == 2: num_booking(username)
+        if option == 1:
+            print("Thanks. Come back soon!"), exit()
+        elif option == 2:
+            num_booking(username)
         else:
             print("No option selected. Goodbye!")
-
 
 
 def main():
@@ -279,6 +281,7 @@ def main():
     update_bookings(day, time, col_day)
     num_booking(username)
 
+
 print("============================================================")
 print("|                                                          |")
 print("|             Welcome to PT Weekly Diary!                  |")
@@ -286,5 +289,8 @@ print("|                                                          |")
 print("============================================================")
 print("\n")
 
+print("Book your sessions for the week")
+print("Check how many sessions you have booked this week")
+print("First log in below\n")
 
 main()

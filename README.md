@@ -116,3 +116,5 @@ The project was deployed to Heroku. The steps below explain the process.
 ## **References/Credit**
 1. [Code Institute]() - Template for base structure. Course requirement to use.
 2. [Bobby Hadz](https://bobbyhadz.com/blog/python-remove-square-brackets-from-list#:~:text=Use%20the%20str.,string%20without%20the%20square%20brackets.) 
+3. [Pexels](https://www.pexels.com/photo/barbells-on-gray-surface-669584/) - Background image
+4. [Favicon](https://favicon.io/emoji-favicons/calendar/) - icon

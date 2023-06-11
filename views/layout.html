@@ -5,14 +5,101 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="terminal based weekly booking system for fictional PT company">
+    <meta name="keywords" content="PT Weekly Diary, pt schedule, pt booking">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xterm/3.14.5/xterm.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xterm/3.14.5/addons/attach/attach.js"></script>
-    <title>Python Terminal by Code Institute</title>
+    <title>PT Weekly Diary</title>
+    <link rel='shortcut icon' type='image/x-icon' href='favicon.ico'>
+
     <style>
+    /* general page styling */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             font-family: Arial;
+            color: #FFFFFF;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: auto;
+            height: 100vh;
+            background-color: #02084B;
         }
+
+        main {
+            clear: both;
+        }
+
+        /* header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: +1;
+            top: 10px;
+        }
+
+        h1 {
+            display: flex;
+            justify-content: center;
+            font-size: 70px;
+            width: 100%;
+            align-items: center;
+        }
+
+        /* background image */
+        a {
+            width: 100%;
+            height: auto;
+            margin: 0;
+        }
+
+        #background-image {
+            margin: 0;
+            z-index: -1;
+            width: 100%;
+            height: auto;
+        }
+
+        /* button */
+        button {
+            width: 200px;
+            height: 40px;
+            background-color: #E84610;
+            border: 1px solid grey;
+            color: white;
+            color: #FFFFFF;
+            text-transform: uppercase;
+            margin: 20px;
+            border-radius: 8px;
+            z-index: +1;
+            position: absolute;
+            top: 150px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* terminal */
+        #terminal {
+            z-index: +1;
+            position: absolute;
+            top: 450px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
 
         /**
         * Default styles for xterm.js
