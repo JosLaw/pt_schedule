@@ -144,16 +144,8 @@ def make_booking(username):
         new_booking = input("Make a new booking? (Y) or (N)\n").capitalize()
         try:
             if new_booking == "N":
-                check = input(
-                    "Have you booked this week? (Y) or (N)\n").capitalize()
-                if check == "Y":
-                    num_booking(username)
-                elif check == "N":
-                    print("Make a new booking to continue\n")
-                else:
-                    print("(Y)es or (N)o not selected. You are now leaving...")
-                    print("Come back when you're ready!")
-                    exit()
+                menu(username)
+                exit()
             elif new_booking == "Y":
                 print()
                 break
@@ -182,7 +174,7 @@ def choose_day():
                 print(
                     f"You selected {choice_day}"
                 )
-                print("checking system...")
+                print("checking system...\n")
                 return select_day, choice_day
         except ValueError as e:
             print(f"Invalid input: {e}.\n")
@@ -205,7 +197,7 @@ def check_worksheet():
         try:
             if choice not in slot:
                 raise ValueError(
-                    f"Please enter a listed number"
+                    f"Enter a listed number"
                 )
             else:
                 choice_time = timeslot[choice]
@@ -254,6 +246,25 @@ def update_clients(data):
     """
     create_user = SHEET.worksheet("clients")
     create_user.append_row(data)
+
+
+def menu(username):
+    """
+    Menu of options for user to pick what they want to do
+    """
+    service = {
+        1: "Leave",
+        2: "Check your bookings",
+    }
+    print("Menu: pick what action you would like (1-2)\n")
+    print(service)
+    option = int(input("Option:\n"))
+    if option in service:
+        if option == 1: print("Thanks. Come back soon!"), exit()
+        elif option == 2: num_booking(username)
+        else:
+            print("No option selected. Goodbye!")
+
 
 
 def main():
