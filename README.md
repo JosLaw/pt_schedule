@@ -92,3 +92,5 @@ The project was deployed to Heroku. The steps below explain the process.
 3. [Pexels](https://www.pexels.com/photo/barbells-on-gray-surface-669584/) - Background image
 4. [Favicon](https://favicon.io/emoji-favicons/calendar/) - icon
 5. [Google Fonts](https://fonts.google.com/) - imported font
+6. [Coolors](https://coolors.co/bbd8b3-f3b61f-a29f15-510d0a-191102) - Colour Scheme Generator
+7. [Alexa H's Github](https://github.com/AlexaH88/harry-potter-adventure-game) - Styling for terminal and central position of button, and header
