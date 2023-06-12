@@ -32,7 +32,7 @@ The logic for the app functions were mapped out on a logic map. You can find the
 ---
 ## **Features**
 ### **Header**
-The header large and central above the terminal to display app name. Basic colour of black to provide contrast to background colour and make it stand out. Imported font called Aoboshi One used.
+The header large and central above the terminal to display app name. Basic colour of black to provide contrast to background colour and make it stand out. Slightly translucent background around header for contrast from background image Imported font called Aoboshi One used.
 
 ### **Button**
 The button is central above the terminal in a bright colour, with black text. On hover the background and text change to more muted colours to signify user interaction.
@@ -58,7 +58,7 @@ The deployed site was shared amongst family and friends to obtain user experienc
 
 ---
 ## **Bugs**
-* Background image would not load - issue unresolved so image removed
+* Background image would not load with local file path. Linked to external hosted site via url instead to make it display. Increased load time as a result but image now present.
 * 
 * 
 
