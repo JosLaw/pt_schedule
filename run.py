@@ -102,6 +102,7 @@ def get_name():
         except ValueError as e:
             print(f"Invalid data: {e}, please try again.\n")
     global client
+    # Ensure correct username format. Capitalises last letter
     client = name[:-1] + name[-1].upper()
     return client
 
@@ -264,8 +265,8 @@ def menu(username):
             print("Thanks. Come back soon!"), exit()
         elif option == 2:
             num_booking(username)
-        else:
-            print("No option selected. Goodbye!")
+    else:
+        print("No valid option selected. Goodbye!")
 
 
 def main():
