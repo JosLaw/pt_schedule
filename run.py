@@ -14,7 +14,6 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('pt_ schedule')
 
 user = []  # Array to hold username
-target_per_week = []  # Array to hold user's target number of training per week
 
 # Days to book
 days = {
@@ -138,7 +137,7 @@ def check_client(username):
 
 def make_booking(username):
     """
-    Provides booking options
+    Provides options for user (make booking, check booked sessions, exit)
     """
     while True:
         new_booking = input("Make a new booking? (Y) or (N)\n").capitalize()
@@ -157,7 +156,7 @@ def make_booking(username):
 
 def choose_day():
     """
-    User to select day
+    User to select day to book
     """
     print(days)
     while True:
@@ -209,7 +208,7 @@ def check_worksheet():
 
 def update_bookings(day, time, col_day):
     """
-    Update spreadsheet with user booking
+    Update spreadsheet with user booking (day and time)
     """
     b_worksheet = SHEET.worksheet('bookings')
     grid_time = grid_ref_time[time]
@@ -219,7 +218,7 @@ def update_bookings(day, time, col_day):
 
 def num_booking(username):
     """
-    Check number of bookings for user
+    Check spreadsheet for number of bookings in the week for user
     """
     while True:
         num_of_bookings = booking_worksheet.findall(username)
@@ -243,7 +242,7 @@ def num_booking(username):
 
 def update_clients(data):
     """
-    Updates worksheet with the client name data provided
+    Updates worksheet with the client name provided for new users
     """
     create_user = SHEET.worksheet("clients")
     create_user.append_row(data)
@@ -282,13 +281,15 @@ def main():
     num_booking(username)
 
 
+# Greeting and instruction on page load
+
+
 print("============================================================")
 print("|                                                          |")
 print("|             Welcome to PT Weekly Diary!                  |")
 print("|                                                          |")
 print("============================================================")
 print("\n")
-
 print("Book your sessions for the week")
 print("Check how many sessions you have booked this week")
 print("First log in below\n")
