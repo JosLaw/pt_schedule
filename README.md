@@ -90,7 +90,7 @@ The site has been tested on a variety of devices and browsers to check the funct
 | Check booking. Use key other than y or n | Value error raised | Yes | None
 | Menu choice. Use int not in options | Terminal froze | No. Expected error message and exit | Incorrect indentation on error message. Corrected.
 
-The deployed site was shared amongst family and friends to obtain user experience feedback. Overall the feedback was positive. There was some confusion in relation to the name format. To make it clearer the example has been made amended in order to be more noticable. They were able to follow the rest of the instructions to create a profile and booking successfully.
+The deployed site was shared amongst family and friends to obtain user experience feedback. Overall the feedback was positive. There was some confusion in relation to the name format. To make it clearer the example has been amended in order to be more noticable. They were able to follow the rest of the instructions to create a profile and booking successfully.
 
 ---
 ## **Bugs**
@@ -122,9 +122,9 @@ The deployed site was shared amongst family and friends to obtain user experienc
 
 ## **Libraries**
 
-* Gspread
-* Numpy
-* Google sheets API
+* Gspread - Used to access and manipulate data from Google Worksheet
+* Numpy - Used for multi-dimensional array in check_worksheet function to find free timeslots on spreadsheet
+* Google sheets API - API to allow app to access and work with google worksheet
 
 ---
 ## **Deployment**
