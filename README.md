@@ -90,7 +90,7 @@ The site has been tested on a variety of devices and browsers to check the funct
 | Check booking. Use key other than y or n | Value error raised | Yes | None
 | Menu choice. Use int not in options | Terminal froze | No. Expected error message and exit | Incorrect indentation on error message. Corrected.
 
-The deployed site was shared amongst family and friends to obtain user experience feedback. Overall the feedback was positive. They were able to follow on app instructions to create a profile and booking successfully.
+The deployed site was shared amongst family and friends to obtain user experience feedback. Overall the feedback was positive. There was some confusion in relation to the name format. To make it clearer the example has been made clearer in order to be more noticable. They were able to follow the rest of the instructions to create a profile and booking successfully.
 
 ---
 ## **Bugs**
@@ -165,3 +165,4 @@ Use the below steps to make a Local Clone
 8. [Google Docs](http://google.com) - Google sheets for worksheet creation and hosting
 9. [Am I Responsive](https://ui.dev/amiresponsive) - Generated screen mockups
 10. [Stack Overflow](https://stackoverflow.com/questions/19309275/how-to-capitalize-first-and-last-letters-of-each-word-in-a-python-string) - Negative indexing solution to username format
+11. [Stack Overflow](https://stackoverflow.com/questions/42056275/comparing-list-against-dict-return-key-if-value-matches-list) - Comparing list values to dictionary values. Used in available slots variable

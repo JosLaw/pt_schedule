@@ -86,7 +86,7 @@ def get_name():
     to be valid.
     """
     while True:
-        print("Enter first name & surname initial (NameS)")
+        print("Enter first name & surname initial. Example: NameS")
         name = input("\n").capitalize()
         try:
             if len(name) <= 2:
