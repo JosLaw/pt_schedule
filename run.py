@@ -170,7 +170,7 @@ def choose_day():
                 )
             else:
                 global choice_day
-                choice_day = days[select_day]
+                choice_day = days[int(select_day)]
                 print(
                     f"You selected {choice_day}"
                 )
@@ -200,7 +200,7 @@ def check_worksheet():
                     f"Enter a listed number"
                 )
             else:
-                choice_time = timeslot[choice]
+                choice_time = timeslot[int(choice)]
                 print(f"You selected {choice_time}\n")
                 return choice_time
         except ValueError as e:
