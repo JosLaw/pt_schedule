@@ -161,10 +161,10 @@ def choose_day():
     """
     print(days)
     while True:
-        select_day = int(input(
-            "What day would you like to book? Enter value 0 - 6: \n"))
+        select_day = input(
+            "What day would you like to book? Enter value 0 - 6: \n")
         try:
-            if select_day not in days:
+            if select_day not in days or not select_day.isnumeric():
                 raise ValueError(
                     f"Please enter a listed number for day"
                 )
@@ -193,9 +193,9 @@ def check_worksheet():
         available_slots = [(k, v) for k, v in timeslot.items() if k in free]
         slot = [k[0] for k in available_slots]
         print(f"Available slots: \n {available_slots} \n")
-        choice = int(input(f"Select timeslot: \n"))
+        choice = input(f"Select timeslot: \n")
         try:
-            if choice not in slot:
+            if choice not in slot or not choice.isnumeric():
                 raise ValueError(
                     f"Enter a listed number"
                 )
